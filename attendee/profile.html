@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - CampusEventHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/attendee.css">
+</head>
+<body>
+
+    <div id="app-container">
+
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="sidebar-brand">
+                    <i class="fa-solid fa-calendar-check"></i> Student Portal
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <span class="sidebar-heading">Explore & Book</span>
+                <a href="dashboard.html" class="nav-link-custom"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="events.html" class="nav-link-custom"><i class="fa-solid fa-compass"></i> Browse Events</a>
+                <a href="my-tickets.html" class="nav-link-custom"><i class="fa-solid fa-ticket"></i> My Passes & Tickets</a>
+                <a href="registrations.html" class="nav-link-custom"><i class="fa-solid fa-clipboard-list"></i> Registrations History</a>
+
+                <span class="sidebar-heading">Account</span>
+                <a href="notifications.html" class="nav-link-custom"><i class="fa-solid fa-bell"></i> Notifications</a>
+                <a href="profile.html" class="nav-link-custom active"><i class="fa-solid fa-user-gear"></i> Profile Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar current-user-avatar">R</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name current-user-name">Rahul Sharma</div>
+                        <div class="sidebar-user-role current-user-role">ATTENDEE</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+
+            <header class="top-navbar">
+                <div class="left-controls">
+                    <button class="sidebar-toggle-btn" type="button"><i class="fa-solid fa-bars"></i></button>
+                    <h5 class="fw-bold m-0 d-none d-md-block">Profile & Account Settings</h5>
+                </div>
+                <div class="right-controls">
+                    <a href="notifications.html" class="nav-icon-btn text-decoration-none">
+                        <i class="fa-regular fa-bell"></i>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="attProfileDrop" data-bs-toggle="dropdown">
+                            <div class="sidebar-user-avatar bg-primary me-2 current-user-avatar">R</div>
+                            <span class="fw-semibold d-none d-sm-inline current-user-name">Rahul Sharma</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                            <li><a class="dropdown-item text-danger" href="#" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-body">
+
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Account & Profile</h2>
+                        <p class="page-subtitle">Update your personal info, photo, and notification preferences</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+
+                    <!-- Profile Form -->
+                    <div class="col-lg-7">
+                        <div class="card card-custom p-4 mb-4">
+                            <h6 class="fw-bold mb-4"><i class="fa-solid fa-user text-primary me-2"></i>Personal Information</h6>
+
+                            <!-- Avatar Upload -->
+                            <div class="profile-avatar-upload mb-4">
+                                <img src="https://ui-avatars.com/api/?name=Rahul+Sharma&background=4f46e5&color=fff&size=200"
+                                     id="profile-avatar-preview" alt="Profile Photo">
+                                <label for="avatar-upload-input" title="Change Photo">
+                                    <i class="fa-solid fa-camera fs-6"></i>
+                                </label>
+                                <input type="file" id="avatar-upload-input" accept="image/*" class="d-none">
+                            </div>
+
+                            <form id="profile-form" novalidate>
+                                <div class="mb-3">
+                                    <label for="profile-name" class="form-label fw-semibold">Full Name</label>
+                                    <input type="text" id="profile-name" class="form-control" required>
+                                    <div class="invalid-feedback">Name is required.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profile-email" class="form-label fw-semibold">Email Address</label>
+                                    <input type="email" id="profile-email" class="form-control" readonly>
+                                    <div class="form-text">Email cannot be changed. Contact admin for email updates.</div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="profile-phone" class="form-label fw-semibold">Mobile Number</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">+91</span>
+                                        <input type="tel" id="profile-phone" class="form-control" placeholder="98765 43210">
+                                    </div>
+                                </div>
+
+                                <button type="submit" id="save-profile-btn" class="btn btn-primary px-4 fw-semibold">
+                                    <i class="fa-solid fa-floppy-disk me-1"></i> Save Profile
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Change Password Section -->
+                        <div class="card card-custom p-4">
+                            <h6 class="fw-bold mb-4"><i class="fa-solid fa-lock text-warning me-2"></i>Change Password</h6>
+                            <form id="password-change-form" novalidate>
+                                <div class="mb-3">
+                                    <label for="current-password" class="form-label fw-semibold">Current Password</label>
+                                    <input type="password" id="current-password" class="form-control" placeholder="••••••••" required>
+                                </div>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label for="new-password" class="form-label fw-semibold">New Password</label>
+                                        <input type="password" id="new-password" class="form-control" minlength="6" placeholder="Min 6 chars" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="confirm-new-password" class="form-label fw-semibold">Confirm New Password</label>
+                                        <input type="password" id="confirm-new-password" class="form-control" placeholder="Re-enter" required>
+                                    </div>
+                                </div>
+                                <button type="submit" id="change-pwd-btn" class="btn btn-warning px-4 fw-semibold">
+                                    <i class="fa-solid fa-key me-1"></i> Update Password
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Notification Preferences Panel -->
+                    <div class="col-lg-5">
+                        <div class="card card-custom p-4">
+                            <h6 class="fw-bold mb-4"><i class="fa-solid fa-bell text-primary me-2"></i>Notification Preferences</h6>
+
+                            <div class="d-flex flex-column gap-3">
+                                <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-3">
+                                    <div>
+                                        <div class="fw-semibold">Ticket Purchase Confirmations</div>
+                                        <div class="small text-muted">Alerts on successful ticket bookings</div>
+                                    </div>
+                                    <div class="form-check form-switch fs-4">
+                                        <input class="form-check-input" type="checkbox" id="notif-ticket" checked>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-3">
+                                    <div>
+                                        <div class="fw-semibold">Event Reminders</div>
+                                        <div class="small text-muted">24h before registered event start</div>
+                                    </div>
+                                    <div class="form-check form-switch fs-4">
+                                        <input class="form-check-input" type="checkbox" id="notif-reminder" checked>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-3">
+                                    <div>
+                                        <div class="fw-semibold">Organizer Announcements</div>
+                                        <div class="small text-muted">Venue & schedule change broadcasts</div>
+                                    </div>
+                                    <div class="form-check form-switch fs-4">
+                                        <input class="form-check-input" type="checkbox" id="notif-announcements" checked>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded-3">
+                                    <div>
+                                        <div class="fw-semibold">New Event Recommendations</div>
+                                        <div class="small text-muted">Curated events based on your interests</div>
+                                    </div>
+                                    <div class="form-check form-switch fs-4">
+                                        <input class="form-check-input" type="checkbox" id="notif-recommendations">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="save-notif-prefs-btn" class="btn btn-outline-primary w-100 mt-4 fw-semibold">
+                                <i class="fa-solid fa-floppy-disk me-1"></i> Save Preferences
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const user = Auth.requireRole("ATTENDEE");
+            if (!user) return;
+
+            // Load profile data
+            try {
+                const res = await API.getAttendeeProfile(user.id);
+                if (res.success && res.data) {
+                    const profile = res.data;
+                    document.getElementById("profile-name").value = profile.name || "";
+                    document.getElementById("profile-email").value = profile.email || "";
+                    document.getElementById("profile-phone").value = profile.phone || "";
+                    // Update avatar with initials
+                    const initials = profile.name ? profile.name.split(' ').map(n => n[0]).join('+').substring(0, 2) : 'U';
+                    document.getElementById("profile-avatar-preview").src =
+                        `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.name)}&background=4f46e5&color=fff&size=200`;
+                }
+            } catch (e) {
+                console.error("Profile load error:", e);
+            }
+
+            // Avatar preview on file select
+            document.getElementById("avatar-upload-input").addEventListener("change", (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => {
+                        document.getElementById("profile-avatar-preview").src = ev.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Save profile
+            document.getElementById("profile-form").addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                form.classList.add("was-validated");
+                if (!form.checkValidity()) return;
+
+                const btn = document.getElementById("save-profile-btn");
+                UI.setBtnLoading(btn, true);
+
+                try {
+                    const res = await API.updateAttendeeProfile(user.id, {
+                        name: document.getElementById("profile-name").value.trim(),
+                        phone: document.getElementById("profile-phone").value.trim()
+                    });
+                    if (res.success) {
+                        UI.showToast("Profile updated successfully!", "success");
+                        // Update session name
+                        const currentUser = Auth.getCurrentUser();
+                        if (currentUser) {
+                            currentUser.name = document.getElementById("profile-name").value.trim();
+                            Auth.setSession(currentUser);
+                        }
+                    } else {
+                        UI.showToast(res.message, "danger");
+                    }
+                } catch (err) {
+                    UI.showToast(err.message, "danger");
+                } finally {
+                    UI.setBtnLoading(btn, false);
+                }
+            });
+
+            // Password change
+            document.getElementById("password-change-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+                const newPwd = document.getElementById("new-password").value;
+                const confirmPwd = document.getElementById("confirm-new-password").value;
+
+                if (newPwd !== confirmPwd) {
+                    document.getElementById("confirm-new-password").setCustomValidity("Passwords don't match");
+                } else {
+                    document.getElementById("confirm-new-password").setCustomValidity("");
+                }
+
+                e.target.classList.add("was-validated");
+                if (!e.target.checkValidity()) return;
+
+                UI.showToast("Password updated successfully! (Mock mode — no actual change).", "success");
+                e.target.reset();
+                e.target.classList.remove("was-validated");
+            });
+
+            // Notification preferences
+            document.getElementById("save-notif-prefs-btn").addEventListener("click", () => {
+                UI.showToast("Notification preferences saved.", "success");
+            });
+        });
+    </script>
+</body>
+</html>

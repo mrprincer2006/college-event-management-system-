@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendee Dashboard - CampusEventHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/attendee.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="sidebar-brand">
+                    <i class="fa-solid fa-calendar-check"></i> Student Portal
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <span class="sidebar-heading">Explore & Book</span>
+                <a href="dashboard.html" class="nav-link-custom"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="events.html" class="nav-link-custom"><i class="fa-solid fa-compass"></i> Browse Events</a>
+                <a href="my-tickets.html" class="nav-link-custom"><i class="fa-solid fa-ticket"></i> My Passes & Tickets</a>
+                <a href="registrations.html" class="nav-link-custom"><i class="fa-solid fa-clipboard-list"></i> Registrations History</a>
+                
+                <span class="sidebar-heading">Account</span>
+                <a href="notifications.html" class="nav-link-custom"><i class="fa-solid fa-bell"></i> Notifications</a>
+                <a href="profile.html" class="nav-link-custom"><i class="fa-solid fa-user-gear"></i> Profile Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar current-user-avatar">R</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name current-user-name">Rahul Sharma</div>
+                        <div class="sidebar-user-role current-user-role">ATTENDEE</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            
+            <header class="top-navbar">
+                <div class="left-controls">
+                    <button class="sidebar-toggle-btn" type="button"><i class="fa-solid fa-bars"></i></button>
+                    <h5 class="fw-bold m-0 d-none d-md-block">Student Dashboard</h5>
+                </div>
+                <div class="right-controls">
+                    <a href="notifications.html" class="nav-icon-btn text-decoration-none">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge-dot" id="nav-notif-dot" style="display: none;"></span>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="attProfileDrop" data-bs-toggle="dropdown">
+                            <div class="sidebar-user-avatar bg-primary me-2 current-user-avatar">R</div>
+                            <span class="fw-semibold d-none d-sm-inline current-user-name">Rahul Sharma</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fa-solid fa-user me-2"></i> My Profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-body">
+                
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Welcome back, <span class="current-user-name">Student</span>!</h2>
+                        <p class="page-subtitle">Your active ticket passes, registrations, and recommended events</p>
+                    </div>
+                    <a href="events.html" class="btn btn-primary"><i class="fa-solid fa-compass me-1"></i> Browse All Events</a>
+                </div>
+
+                <!-- Stat Cards -->
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">My Active Tickets</span>
+                                <div class="stat-icon bg-primary-light text-primary"><i class="fa-solid fa-ticket"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="att-stat-tickets-count">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Registered Events</span>
+                                <div class="stat-icon bg-info-light text-info"><i class="fa-solid fa-calendar-check"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="att-stat-regs-count">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Unread Notifications</span>
+                                <div class="stat-icon bg-warning-light text-warning"><i class="fa-solid fa-bell"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0 text-warning" id="att-stat-notifs-count">0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <!-- My Purchased Passes Preview -->
+                    <div class="col-lg-6">
+                        <div class="card card-custom p-3 h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="fw-bold m-0"><i class="fa-solid fa-ticket me-2 text-primary"></i>My Active Ticket Passes</h6>
+                                <a href="my-tickets.html" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div id="att-my-tickets-preview">
+                                <!-- Loaded dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Notifications Preview -->
+                    <div class="col-lg-6">
+                        <div class="card card-custom p-3 h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="fw-bold m-0"><i class="fa-solid fa-bell me-2 text-warning"></i>Recent Notifications</h6>
+                                <a href="notifications.html" class="btn btn-sm btn-outline-primary">Open Inbox</a>
+                            </div>
+                            <div id="att-notifications-preview">
+                                <!-- Loaded dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Featured Recommended Events -->
+                <div class="card card-custom p-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="fw-bold m-0"><i class="fa-solid fa-sparkles me-2 text-primary"></i>Upcoming Campus Events For You</h6>
+                        <a href="events.html" class="btn btn-sm btn-outline-primary">Explore All</a>
+                    </div>
+                    <div class="row g-3" id="att-upcoming-events-grid">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/attendee/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organizer Dashboard - CampusEventHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/organizer.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="sidebar-brand">
+                    <i class="fa-solid fa-calendar-check"></i> Organizer Portal
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <span class="sidebar-heading">Management</span>
+                <a href="dashboard.html" class="nav-link-custom"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="events.html" class="nav-link-custom"><i class="fa-solid fa-calendar-days"></i> My Events</a>
+                <a href="create-event.html" class="nav-link-custom"><i class="fa-solid fa-plus-circle"></i> Create Event</a>
+                <a href="tickets.html" class="nav-link-custom"><i class="fa-solid fa-ticket"></i> Manage Tickets</a>
+                
+                <span class="sidebar-heading">Attendees & Reports</span>
+                <a href="attendees.html" class="nav-link-custom"><i class="fa-solid fa-users-line"></i> Attendees List</a>
+                <a href="communication.html" class="nav-link-custom"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+                <a href="statistics.html" class="nav-link-custom"><i class="fa-solid fa-chart-simple"></i> Statistics</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar current-user-avatar">O</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name current-user-name">Organizer</div>
+                        <div class="sidebar-user-role current-user-role">ORGANIZER</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            
+            <header class="top-navbar">
+                <div class="left-controls">
+                    <button class="sidebar-toggle-btn" type="button"><i class="fa-solid fa-bars"></i></button>
+                    <h5 class="fw-bold m-0 d-none d-md-block">Organizer Dashboard</h5>
+                </div>
+                <div class="right-controls">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="orgProfileDrop" data-bs-toggle="dropdown">
+                            <div class="sidebar-user-avatar bg-primary me-2 current-user-avatar">O</div>
+                            <span class="fw-semibold d-none d-sm-inline current-user-name">Tech Events Co.</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                            <li><a class="dropdown-item text-danger" href="#" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-body">
+                
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Organizer Overview</h2>
+                        <p class="page-subtitle">Track ticket sales, upcoming event schedules, and revenue metrics</p>
+                    </div>
+                    <a href="create-event.html" class="btn btn-primary"><i class="fa-solid fa-plus me-1"></i> Host New Event</a>
+                </div>
+
+                <!-- Stat Cards -->
+                <div class="row g-3 mb-4">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Total Hosted Events</span>
+                                <div class="stat-icon bg-primary-light text-primary"><i class="fa-solid fa-calendar-day"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="org-stat-total-events">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Upcoming Events</span>
+                                <div class="stat-icon bg-info-light text-info"><i class="fa-solid fa-clock"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="org-stat-upcoming-events">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Total Registrations</span>
+                                <div class="stat-icon bg-warning-light text-warning"><i class="fa-solid fa-users"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="org-stat-total-regs">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Total Revenue (₹)</span>
+                                <div class="stat-icon bg-success-light text-success"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0 text-success" id="org-stat-total-revenue">₹0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="card card-custom p-3 h-100">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-chart-line me-2 text-primary"></i>Registrations & Ticket Sales Trend</h6>
+                            <div style="position: relative; height: 250px;">
+                                <canvas id="orgSalesChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-custom p-3 h-100">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-pie-chart me-2 text-primary"></i>Events Status Distribution</h6>
+                            <div style="position: relative; height: 250px;">
+                                <canvas id="orgStatusChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Events List with Deadlines -->
+                <div class="card card-custom p-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="fw-bold m-0"><i class="fa-solid fa-list-check me-2 text-primary"></i>Upcoming Events & Key Deadlines</h6>
+                        <a href="events.html" class="btn btn-sm btn-outline-primary">Manage All</a>
+                    </div>
+                    <div class="table-responsive" id="org-upcoming-events-container">
+                        <!-- Loaded dynamically -->
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/organizer/dashboard.js"></script>
+</body>
+</html>

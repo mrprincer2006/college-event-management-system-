@@ -1,0 +1,86 @@
+/* ==========================================
+   AUTHENTICATION STYLES (Login & Register)
+   ========================================== */
+
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+    padding: 2rem 1rem;
+}
+
+.auth-card {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 440px;
+    padding: 2.5rem;
+    border: 1px solid var(--border);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.auth-form .form-label {
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--text);
+}
+
+.auth-form .form-control,
+.auth-form .form-select {
+    border-radius: var(--radius-sm);
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--border);
+}
+
+.auth-form .form-control:focus,
+.auth-form .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.password-toggle-btn {
+    border: 1px solid var(--border);
+    border-left: none;
+    background: transparent;
+    color: var(--muted);
+}
+
+.mock-hint-box {
+    background-color: var(--primary-light);
+    border: 1px solid #c7d2fe;
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.8rem;
+    color: #3730a3;
+    margin-bottom: 1.5rem;
+}
+
+.mock-hint-box code {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #1e1b4b;
+    font-weight: 600;
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Analytics - CampusEventHub Organizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/organizer.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="sidebar-brand">
+                    <i class="fa-solid fa-calendar-check"></i> Organizer Portal
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <span class="sidebar-heading">Management</span>
+                <a href="dashboard.html" class="nav-link-custom"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="events.html" class="nav-link-custom"><i class="fa-solid fa-calendar-days"></i> My Events</a>
+                <a href="create-event.html" class="nav-link-custom"><i class="fa-solid fa-plus-circle"></i> Create Event</a>
+                <a href="tickets.html" class="nav-link-custom"><i class="fa-solid fa-ticket"></i> Manage Tickets</a>
+                
+                <span class="sidebar-heading">Attendees & Reports</span>
+                <a href="attendees.html" class="nav-link-custom"><i class="fa-solid fa-users-line"></i> Attendees List</a>
+                <a href="communication.html" class="nav-link-custom"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+                <a href="statistics.html" class="nav-link-custom active"><i class="fa-solid fa-chart-simple"></i> Statistics</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar current-user-avatar">O</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name current-user-name">Organizer</div>
+                        <div class="sidebar-user-role current-user-role">ORGANIZER</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+            
+            <header class="top-navbar">
+                <div class="left-controls">
+                    <button class="sidebar-toggle-btn" type="button"><i class="fa-solid fa-bars"></i></button>
+                    <h5 class="fw-bold m-0 d-none d-md-block">Event Performance Analytics</h5>
+                </div>
+                <div class="right-controls">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="orgProfileDrop" data-bs-toggle="dropdown">
+                            <div class="sidebar-user-avatar bg-primary me-2 current-user-avatar">O</div>
+                            <span class="fw-semibold d-none d-sm-inline current-user-name">Tech Events Co.</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                            <li><a class="dropdown-item text-danger" href="#" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-body">
+                
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Organizer Analytics</h2>
+                        <p class="page-subtitle">Track ticket sales velocity, attendee city distribution, and event performance</p>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-8">
+                        <div class="card card-custom p-3 h-100">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-chart-line text-primary me-2"></i>Ticket Sales Velocity & Revenue</h6>
+                            <div style="position: relative; height: 260px;">
+                                <canvas id="orgVelocityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card card-custom p-3 h-100">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-location-dot text-danger me-2"></i>Attendee City Breakdown</h6>
+                            <div style="position: relative; height: 260px;">
+                                <canvas id="orgCityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-custom p-3">
+                    <h6 class="fw-bold mb-3"><i class="fa-solid fa-ticket text-success me-2"></i>Sales Comparison by Ticket Type</h6>
+                    <div style="position: relative; height: 260px;">
+                        <canvas id="orgTicketTypeChart"></canvas>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/organizer/statistics.js"></script>
+</body>
+</html>

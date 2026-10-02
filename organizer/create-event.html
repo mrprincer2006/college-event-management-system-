@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event - CampusEventHub Organizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/organizer.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="sidebar-brand">
+                    <i class="fa-solid fa-calendar-check"></i> Organizer Portal
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <span class="sidebar-heading">Management</span>
+                <a href="dashboard.html" class="nav-link-custom"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="events.html" class="nav-link-custom"><i class="fa-solid fa-calendar-days"></i> My Events</a>
+                <a href="create-event.html" class="nav-link-custom active"><i class="fa-solid fa-plus-circle"></i> Create Event</a>
+                <a href="tickets.html" class="nav-link-custom"><i class="fa-solid fa-ticket"></i> Manage Tickets</a>
+                
+                <span class="sidebar-heading">Attendees & Reports</span>
+                <a href="attendees.html" class="nav-link-custom"><i class="fa-solid fa-users-line"></i> Attendees List</a>
+                <a href="communication.html" class="nav-link-custom"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+                <a href="statistics.html" class="nav-link-custom"><i class="fa-solid fa-chart-simple"></i> Statistics</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar current-user-avatar">O</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name current-user-name">Organizer</div>
+                        <div class="sidebar-user-role current-user-role">ORGANIZER</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+            
+            <header class="top-navbar">
+                <div class="left-controls">
+                    <button class="sidebar-toggle-btn" type="button"><i class="fa-solid fa-bars"></i></button>
+                    <h5 class="fw-bold m-0 d-none d-md-block">Host New Event</h5>
+                </div>
+                <div class="right-controls">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="orgProfileDrop" data-bs-toggle="dropdown">
+                            <div class="sidebar-user-avatar bg-primary me-2 current-user-avatar">O</div>
+                            <span class="fw-semibold d-none d-sm-inline current-user-name">Tech Events Co.</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                            <li><a class="dropdown-item text-danger" href="#" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-body">
+                
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Create Event Submission</h2>
+                        <p class="page-subtitle">Fill in complete details to submit event for admin approval</p>
+                    </div>
+                    <a href="events.html" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left me-1"></i> Back to Events</a>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="card card-custom p-4">
+                            
+                            <form id="create-event-form" novalidate>
+                                
+                                <div class="mb-3">
+                                    <label for="event-title" class="form-label fw-semibold">Event Title <span class="text-danger">*</span></label>
+                                    <input type="text" id="event-title" class="form-control" placeholder="e.g. National Hackathon 2026" required>
+                                    <div class="invalid-feedback">Event title is required.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="event-desc" class="form-label fw-semibold">Event Description <span class="text-danger">*</span></label>
+                                    <textarea id="event-desc" class="form-control" rows="4" placeholder="Describe key agenda, speakers, rules..." required></textarea>
+                                    <div class="invalid-feedback">Description is required.</div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-4">
+                                        <label for="event-category" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+                                        <select id="event-category" class="form-select" required>
+                                            <option value="" disabled selected>Select Category</option>
+                                            <option value="Technology">Technology</option>
+                                            <option value="Music">Music</option>
+                                            <option value="Business">Business</option>
+                                            <option value="Sports">Sports</option>
+                                            <option value="Education">Education</option>
+                                            <option value="Arts">Arts</option>
+                                        </select>
+                                        <div class="invalid-feedback">Select a category.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="event-date" class="form-label fw-semibold">Event Date <span class="text-danger">*</span></label>
+                                        <input type="date" id="event-date" class="form-control" required>
+                                        <div class="invalid-feedback" id="date-feedback">Event date is required and cannot be in the past.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="event-capacity" class="form-label fw-semibold">Maximum Capacity <span class="text-danger">*</span></label>
+                                        <input type="number" id="event-capacity" class="form-control" min="1" placeholder="e.g. 500" required>
+                                        <div class="invalid-feedback">Capacity must be greater than 0.</div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label for="start-time" class="form-label fw-semibold">Start Time <span class="text-danger">*</span></label>
+                                        <input type="time" id="start-time" class="form-control" required>
+                                        <div class="invalid-feedback">Start time required.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="end-time" class="form-label fw-semibold">End Time <span class="text-danger">*</span></label>
+                                        <input type="time" id="end-time" class="form-control" required>
+                                        <div class="invalid-feedback" id="time-feedback">End time must be after start time.</div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-md-8">
+                                        <label for="event-venue" class="form-label fw-semibold">Venue / Building Name <span class="text-danger">*</span></label>
+                                        <input type="text" id="event-venue" class="form-control" placeholder="e.g. Main Auditorium, CS Block" required>
+                                        <div class="invalid-feedback">Venue is required.</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="event-city" class="form-label fw-semibold">City <span class="text-danger">*</span></label>
+                                        <input type="text" id="event-city" class="form-control" placeholder="e.g. Bengaluru" required>
+                                        <div class="invalid-feedback">City is required.</div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="event-image-url" class="form-label fw-semibold">Event Banner Image URL (or upload placeholder)</label>
+                                    <input type="url" id="event-image-url" class="form-control" placeholder="https://images.unsplash.com/photo-...">
+                                    <div class="form-text">Paste image link or leave blank to use a default curated category image.</div>
+                                </div>
+
+                                <div class="alert alert-info py-2 px-3 small mb-4">
+                                    <i class="fa-solid fa-circle-info me-1"></i> Note: Newly submitted events will be set to <strong>PENDING</strong> status until reviewed by Admin.
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <a href="events.html" class="btn btn-light px-4">Cancel</a>
+                                    <button type="submit" id="submit-create-event-btn" class="btn btn-primary px-4">
+                                        <i class="fa-solid fa-paper-plane me-1"></i> Submit Event for Approval
+                                    </button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const user = Auth.requireRole("ORGANIZER");
+            if (!user) return;
+
+            // Set default date min to today
+            const todayStr = new Date().toISOString().split('T')[0];
+            document.getElementById("event-date").setAttribute("min", todayStr);
+
+            const form = document.getElementById("create-event-form");
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const title = document.getElementById("event-title").value.trim();
+                const desc = document.getElementById("event-desc").value.trim();
+                const category = document.getElementById("event-category").value;
+                const dateVal = document.getElementById("event-date").value;
+                const capacity = parseInt(document.getElementById("event-capacity").value, 10);
+                const startTime = document.getElementById("start-time").value;
+                const endTime = document.getElementById("end-time").value;
+                const venue = document.getElementById("event-venue").value.trim();
+                const city = document.getElementById("event-city").value.trim();
+                let imgUrl = document.getElementById("event-image-url").value.trim();
+
+                let isValid = true;
+
+                // Validate Date not in past
+                if (dateVal < todayStr) {
+                    document.getElementById("event-date").setCustomValidity("Date in past");
+                    isValid = false;
+                } else {
+                    document.getElementById("event-date").setCustomValidity("");
+                }
+
+                // Validate End time after Start time
+                if (startTime && endTime && endTime <= startTime) {
+                    document.getElementById("end-time").setCustomValidity("End time before start");
+                    isValid = false;
+                } else {
+                    document.getElementById("end-time").setCustomValidity("");
+                }
+
+                form.classList.add("was-validated");
+                if (!form.checkValidity() || !isValid) return;
+
+                if (!imgUrl) {
+                    imgUrl = "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&auto=format&fit=crop&q=80";
+                }
+
+                const btn = document.getElementById("submit-create-event-btn");
+                UI.setBtnLoading(btn, true, "Submitting...");
+
+                try {
+                    const res = await API.createEvent({
+                        organizer_id: user.id,
+                        title,
+                        description: desc,
+                        category,
+                        event_date: dateVal,
+                        capacity,
+                        start_time: startTime,
+                        end_time: endTime,
+                        venue,
+                        city,
+                        image_url: imgUrl
+                    });
+
+                    if (res.success) {
+                        UI.showToast("Event submitted for admin approval!", "success");
+                        setTimeout(() => {
+                            window.location.href = `tickets.html?eventId=${res.data.id}`;
+                        }, 1200);
+                    } else {
+                        UI.showToast(res.message, "danger");
+                    }
+                } catch (err) {
+                    UI.showToast(err.message, "danger");
+                } finally {
+                    UI.setBtnLoading(btn, false);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

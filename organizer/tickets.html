@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Tickets - CampusEventHub Organizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/organizer.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="sidebar-brand">
+                    <i class="fa-solid fa-calendar-check"></i> Organizer Portal
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <span class="sidebar-heading">Management</span>
+                <a href="dashboard.html" class="nav-link-custom"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="events.html" class="nav-link-custom"><i class="fa-solid fa-calendar-days"></i> My Events</a>
+                <a href="create-event.html" class="nav-link-custom"><i class="fa-solid fa-plus-circle"></i> Create Event</a>
+                <a href="tickets.html" class="nav-link-custom active"><i class="fa-solid fa-ticket"></i> Manage Tickets</a>
+                
+                <span class="sidebar-heading">Attendees & Reports</span>
+                <a href="attendees.html" class="nav-link-custom"><i class="fa-solid fa-users-line"></i> Attendees List</a>
+                <a href="communication.html" class="nav-link-custom"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+                <a href="statistics.html" class="nav-link-custom"><i class="fa-solid fa-chart-simple"></i> Statistics</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar current-user-avatar">O</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name current-user-name">Organizer</div>
+                        <div class="sidebar-user-role current-user-role">ORGANIZER</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+            
+            <header class="top-navbar">
+                <div class="left-controls">
+                    <button class="sidebar-toggle-btn" type="button"><i class="fa-solid fa-bars"></i></button>
+                    <h5 class="fw-bold m-0 d-none d-md-block">Ticket Management</h5>
+                </div>
+                <div class="right-controls">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="orgProfileDrop" data-bs-toggle="dropdown">
+                            <div class="sidebar-user-avatar bg-primary me-2 current-user-avatar">O</div>
+                            <span class="fw-semibold d-none d-sm-inline current-user-name">Tech Events Co.</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                            <li><a class="dropdown-item text-danger" href="#" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-body">
+                
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Event Ticket Tiers</h2>
+                        <p class="page-subtitle">Configure ticket categories, prices, quantities, and sale dates</p>
+                    </div>
+                </div>
+
+                <!-- Select Event Dropdown Card -->
+                <div class="card card-custom p-3 mb-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <label for="select-event-dropdown" class="form-label fw-bold mb-0">Select Event:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <select id="select-event-dropdown" class="form-select">
+                                <option value="" disabled selected>Loading your events...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ticket Management Grid -->
+                <div class="row g-4" id="ticket-section-container" style="display: none;">
+                    
+                    <!-- Create/Edit Form Column -->
+                    <div class="col-lg-5">
+                        <div class="card card-custom p-4">
+                            <h5 class="fw-bold mb-3" id="ticketFormTitle"><i class="fa-solid fa-ticket text-primary me-2"></i>Add Ticket Tier</h5>
+                            
+                            <form id="ticket-form" novalidate>
+                                <input type="hidden" id="ticket-id">
+                                
+                                <div class="mb-3">
+                                    <label for="ticket-name" class="form-label fw-semibold">Ticket Name <span class="text-danger">*</span></label>
+                                    <input type="text" id="ticket-name" class="form-control" placeholder="e.g. Regular Pass / VIP Entry" required>
+                                    <div class="invalid-feedback">Ticket name is required.</div>
+                                </div>
+
+                                <div class="row g-3 mb-3">
+                                    <div class="col-6">
+                                        <label for="ticket-price" class="form-label fw-semibold">Price (₹) <span class="text-danger">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input type="number" id="ticket-price" class="form-control" min="0" placeholder="0 for free" required>
+                                        </div>
+                                        <div class="invalid-feedback">Price must be 0 or positive.</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="ticket-quantity" class="form-label fw-semibold">Total Quantity <span class="text-danger">*</span></label>
+                                        <input type="number" id="ticket-quantity" class="form-control" min="1" placeholder="e.g. 100" required>
+                                        <div class="invalid-feedback">Quantity must be > 0.</div>
+                                    </div>
+                                </div>
+
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6">
+                                        <label for="sale-start" class="form-label fw-semibold">Sale Start Date</label>
+                                        <input type="date" id="sale-start" class="form-control" required>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="sale-end" class="form-label fw-semibold">Sale End Date</label>
+                                        <input type="date" id="sale-end" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-light" id="reset-ticket-form-btn">Reset</button>
+                                    <button type="submit" id="save-ticket-btn" class="btn btn-primary w-100 fw-semibold">
+                                        <i class="fa-solid fa-plus me-1"></i> Save Ticket Tier
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Existing Ticket Tiers List Column -->
+                    <div class="col-lg-7">
+                        <div class="card card-custom p-3">
+                            <h5 class="fw-bold mb-3"><i class="fa-solid fa-list me-2 text-primary"></i>Active Ticket Tiers</h5>
+                            <div class="table-responsive" id="tickets-table-container">
+                                <!-- Loaded dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/organizer/tickets.js"></script>
+</body>
+</html>

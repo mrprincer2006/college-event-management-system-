@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendee Communication - CampusEventHub Organizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/organizer.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="sidebar-brand">
+                    <i class="fa-solid fa-calendar-check"></i> Organizer Portal
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <span class="sidebar-heading">Management</span>
+                <a href="dashboard.html" class="nav-link-custom"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="events.html" class="nav-link-custom"><i class="fa-solid fa-calendar-days"></i> My Events</a>
+                <a href="create-event.html" class="nav-link-custom"><i class="fa-solid fa-plus-circle"></i> Create Event</a>
+                <a href="tickets.html" class="nav-link-custom"><i class="fa-solid fa-ticket"></i> Manage Tickets</a>
+                
+                <span class="sidebar-heading">Attendees & Reports</span>
+                <a href="attendees.html" class="nav-link-custom"><i class="fa-solid fa-users-line"></i> Attendees List</a>
+                <a href="communication.html" class="nav-link-custom active"><i class="fa-solid fa-bullhorn"></i> Announcements</a>
+                <a href="statistics.html" class="nav-link-custom"><i class="fa-solid fa-chart-simple"></i> Statistics</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar current-user-avatar">O</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name current-user-name">Organizer</div>
+                        <div class="sidebar-user-role current-user-role">ORGANIZER</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div class="main-wrapper">
+            
+            <header class="top-navbar">
+                <div class="left-controls">
+                    <button class="sidebar-toggle-btn" type="button"><i class="fa-solid fa-bars"></i></button>
+                    <h5 class="fw-bold m-0 d-none d-md-block">Attendee Broadcasts</h5>
+                </div>
+                <div class="right-controls">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="orgProfileDrop" data-bs-toggle="dropdown">
+                            <div class="sidebar-user-avatar bg-primary me-2 current-user-avatar">O</div>
+                            <span class="fw-semibold d-none d-sm-inline current-user-name">Tech Events Co.</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                            <li><a class="dropdown-item text-danger" href="#" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-body">
+                
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Broadcast Announcement</h2>
+                        <p class="page-subtitle">Send instant updates, parking details, or venue changes to event attendees</p>
+                    </div>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Send Form -->
+                    <div class="col-lg-6">
+                        <div class="card card-custom p-4">
+                            <h5 class="fw-bold mb-3"><i class="fa-solid fa-paper-plane text-primary me-2"></i>New Broadcast Message</h5>
+                            
+                            <form id="comm-form" novalidate>
+                                <div class="mb-3">
+                                    <label for="comm-event-select" class="form-label fw-semibold">Target Event <span class="text-danger">*</span></label>
+                                    <select id="comm-event-select" class="form-select" required>
+                                        <option value="" disabled selected>-- Select Event --</option>
+                                    </select>
+                                    <div class="invalid-feedback">Target event is required.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="comm-title" class="form-label fw-semibold">Announcement Title <span class="text-danger">*</span></label>
+                                    <input type="text" id="comm-title" class="form-control" placeholder="e.g. Venue Entry Gate Update" required>
+                                    <div class="invalid-feedback">Title is required.</div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="comm-message" class="form-label fw-semibold">Message Content <span class="text-danger">*</span></label>
+                                    <textarea id="comm-message" class="form-control" rows="4" placeholder="Enter message details for registered attendees..." required></textarea>
+                                    <div class="invalid-feedback">Message body is required.</div>
+                                </div>
+
+                                <button type="submit" id="send-comm-btn" class="btn btn-primary w-100 py-2 fw-semibold">
+                                    <i class="fa-solid fa-bullhorn me-1"></i> Send Update to Attendees
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Previously Sent Announcements List -->
+                    <div class="col-lg-6">
+                        <div class="card card-custom p-3">
+                            <h5 class="fw-bold mb-3"><i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>Sent Announcements Log</h5>
+                            <div id="sent-announcements-container">
+                                <!-- Loaded dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/organizer/communication.js"></script>
+</body>
+</html>

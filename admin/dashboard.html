@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CampusEventHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="dashboard.html" class="sidebar-brand">
+                    <i class="fa-solid fa-shield-halved"></i> Admin Portal
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <span class="sidebar-heading">Core</span>
+                <a href="dashboard.html" class="nav-link-custom"><i class="fa-solid fa-gauge"></i> Dashboard</a>
+                <a href="users.html" class="nav-link-custom"><i class="fa-solid fa-users"></i> Users Management</a>
+                <a href="event-approvals.html" class="nav-link-custom"><i class="fa-solid fa-clipboard-check"></i> Event Approvals</a>
+                
+                <span class="sidebar-heading">Analytics & System</span>
+                <a href="statistics.html" class="nav-link-custom"><i class="fa-solid fa-chart-pie"></i> Statistics</a>
+                <a href="activity.html" class="nav-link-custom"><i class="fa-solid fa-clock-rotate-left"></i> Activity Logs</a>
+                <a href="settings.html" class="nav-link-custom"><i class="fa-solid fa-sliders"></i> System Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="sidebar-user-avatar current-user-avatar">A</div>
+                    <div class="sidebar-user-info">
+                        <div class="sidebar-user-name current-user-name">Admin User</div>
+                        <div class="sidebar-user-role current-user-role">ADMIN</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            
+            <!-- Top Navbar -->
+            <header class="top-navbar">
+                <div class="left-controls">
+                    <button class="sidebar-toggle-btn" type="button">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="search-input-group d-none d-md-block">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" class="form-control" placeholder="Search system...">
+                    </div>
+                </div>
+                <div class="right-controls">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="adminProfileDrop" data-bs-toggle="dropdown">
+                            <div class="sidebar-user-avatar bg-primary me-2 current-user-avatar">A</div>
+                            <span class="fw-semibold d-none d-sm-inline current-user-name">Admin User</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                            <li><a class="dropdown-menu-item text-danger dropdown-item" href="#" onclick="Auth.logout()"><i class="fa-solid fa-right-from-bracket me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Body -->
+            <main class="dashboard-body">
+                
+                <div class="page-header">
+                    <div>
+                        <h2 class="page-title">Admin System Overview</h2>
+                        <p class="page-subtitle">Monitor user activity, event approvals, and revenue metrics</p>
+                    </div>
+                </div>
+
+                <!-- Stat Cards Row -->
+                <div class="row g-3 mb-4">
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Total Users</span>
+                                <div class="stat-icon bg-primary-light text-primary"><i class="fa-solid fa-users"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="stat-total-users">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Total Events</span>
+                                <div class="stat-icon bg-info-light text-info"><i class="fa-solid fa-calendar-days"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="stat-total-events">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Pending Approvals</span>
+                                <div class="stat-icon bg-warning-light text-warning"><i class="fa-solid fa-clock"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0 text-warning" id="stat-pending-events">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Approved Events</span>
+                                <div class="stat-icon bg-success-light text-success"><i class="fa-solid fa-circle-check"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="stat-approved-events">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Total Bookings</span>
+                                <div class="stat-icon bg-primary-light text-primary"><i class="fa-solid fa-ticket"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0" id="stat-total-regs">0</h3>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-6">
+                        <div class="card-stat">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="text-muted small fw-semibold">Total Sales</span>
+                                <div class="stat-icon bg-success-light text-success"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+                            </div>
+                            <h3 class="fw-bold mb-0 text-success" id="stat-total-sales">₹0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-lg-4">
+                        <div class="card card-custom h-100 p-3">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-chart-pie me-2 text-primary"></i>Events Status Breakup</h6>
+                            <div style="position: relative; height: 240px;">
+                                <canvas id="eventStatusChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card card-custom h-100 p-3">
+                            <h6 class="fw-bold mb-3"><i class="fa-solid fa-chart-line me-2 text-primary"></i>Monthly Registrations & Sales Trend</h6>
+                            <div style="position: relative; height: 240px;">
+                                <canvas id="salesTrendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Previews Row -->
+                <div class="row g-4">
+                    <!-- Pending Approvals Preview -->
+                    <div class="col-lg-6">
+                        <div class="card card-custom p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="fw-bold m-0"><i class="fa-solid fa-clipboard-check me-2 text-warning"></i>Pending Event Approvals</h6>
+                                <a href="event-approvals.html" class="btn btn-sm btn-outline-primary">View All</a>
+                            </div>
+                            <div class="table-responsive" id="pending-preview-container">
+                                <!-- Dynamically loaded -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent System Activity -->
+                    <div class="col-lg-6">
+                        <div class="card card-custom p-3">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="fw-bold m-0"><i class="fa-solid fa-clock-rotate-left me-2 text-primary"></i>Recent System Activity</h6>
+                                <a href="activity.html" class="btn btn-sm btn-outline-primary">Full Log</a>
+                            </div>
+                            <div id="activity-preview-container">
+                                <!-- Dynamically loaded -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/mock-data.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/admin/dashboard.js"></script>
+</body>
+</html>

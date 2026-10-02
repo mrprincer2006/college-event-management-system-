@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusEventHub - Online Event Management System</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Public Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-public sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fa-solid fa-calendar-check text-primary"></i> CampusEventHub
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#publicNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="publicNav">
+                <ul class="navbar-nav me-auto ms-lg-4 mb-2 mb-lg-0 fw-medium">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#explore-events">Browse Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#categories">Categories</a></li>
+                </ul>
+                <div class="d-flex gap-2" id="nav-auth-buttons">
+                    <a href="login.html" class="btn btn-outline-primary px-3">Login</a>
+                    <a href="register.html" class="btn btn-primary px-3">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section text-center position-relative">
+        <div class="container py-4">
+            <span class="badge bg-white text-primary px-3 py-2 rounded-pill fw-semibold mb-3 shadow-sm">
+                <i class="fa-solid fa-sparkles text-warning me-1"></i> The Ultimate College & Tech Event Portal
+            </span>
+            <h1 class="display-4 fw-bold mb-3">Discover, Create & Experience Amazing Events</h1>
+            <p class="lead mb-4 opacity-90 mx-auto" style="max-width: 650px;">
+                Find top tech summits, cultural fests, workshops, and sports championships happening across India.
+            </p>
+            
+            <!-- Hero Search Bar -->
+            <div class="bg-white p-2 rounded-4 shadow-lg mx-auto d-flex flex-column flex-md-row gap-2" style="max-width: 680px;">
+                <div class="input-group border-0">
+                    <span class="input-group-text bg-transparent border-0 text-muted ps-3"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" id="hero-search-input" class="form-control border-0 shadow-none" placeholder="Search event title, topic or venue...">
+                </div>
+                <button type="button" id="hero-search-btn" class="btn btn-primary px-4 py-2 rounded-3 text-nowrap">
+                    Search Events
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        
+        <!-- Categories Section -->
+        <section id="categories" class="mb-5">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h3 class="fw-bold m-0"><i class="fa-solid fa-layer-group text-primary me-2"></i>Event Categories</h3>
+            </div>
+            <div class="d-flex flex-wrap gap-2" id="category-pills">
+                <button class="category-pill active" data-cat="ALL"><i class="fa-solid fa-grid-2"></i> All Events</button>
+                <button class="category-pill" data-cat="Technology"><i class="fa-solid fa-laptop-code text-info"></i> Technology</button>
+                <button class="category-pill" data-cat="Music"><i class="fa-solid fa-music text-danger"></i> Music</button>
+                <button class="category-pill" data-cat="Business"><i class="fa-solid fa-briefcase text-success"></i> Business</button>
+                <button class="category-pill" data-cat="Sports"><i class="fa-solid fa-football text-warning"></i> Sports</button>
+                <button class="category-pill" data-cat="Education"><i class="fa-solid fa-graduation-cap text-primary"></i> Education</button>
+                <button class="category-pill" data-cat="Arts"><i class="fa-solid fa-palette text-secondary"></i> Arts</button>
+            </div>
+        </section>
+
+        <!-- Events Grid Section -->
+        <section id="explore-events">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div>
+                    <h3 class="fw-bold m-0">Featured & Upcoming Events</h3>
+                    <p class="text-muted small m-0">Explore approved events with live ticket booking</p>
+                </div>
+            </div>
+
+            <!-- Events Grid -->
+            <div class="row g-4" id="events-grid-container">
+                <!-- Dynamically Populated -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="text-white fw-bold mb-3"><i class="fa-solid fa-calendar-check text-primary me-2"></i>CampusEventHub</h5>
+                    <p class="small text-muted mb-3">
+                        Comprehensive Web-Based Event Management Platform for academic institutions, tech fests, and student organizations.
+                    </p>
+                    <p class="small text-muted m-0">Built with HTML5, CSS3, JavaScript & Java Servlets.</p>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <h6 class="text-white fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#explore-events">Explore Events</a></li>
+                        <li><a href="login.html">Login Portal</a></li>
+                        <li><a href="register.html">Register Account</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-white fw-bold mb-3">User Roles</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+                        <li><a href="login.html">Administrator Dashboard</a></li>
+                        <li><a href="login.html">Event Organizer Dashboard</a></li>
+                        <li><a href="login.html">Student / Attendee Portal</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="text-white fw-bold mb-3">Contact Support</h6>
+                    <p class="small text-muted mb-2"><i class="fa-solid fa-envelope me-2 text-primary"></i>support@campuseventhub.edu</p>
+                    <p class="small text-muted"><i class="fa-solid fa-location-dot me-2 text-primary"></i>Dept of Computer Science & Engineering</p>
+                </div>
+            </div>
+            <hr class="border-secondary opacity-25">
+            <div class="text-center small text-muted py-2">
+                &copy; 2026 CampusEventHub. Academic Project (Java Programming - Review 1). All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/mock-data.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        let currentCategory = "ALL";
+        let searchQuery = "";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            checkAuthHeader();
+            loadPublicEvents();
+
+            // Category pill click handler
+            document.querySelectorAll("#category-pills .category-pill").forEach(pill => {
+                pill.addEventListener("click", (e) => {
+                    document.querySelectorAll("#category-pills .category-pill").forEach(p => p.classList.remove("active"));
+                    pill.classList.add("active");
+                    currentCategory = pill.dataset.cat;
+                    loadPublicEvents();
+                });
+            });
+
+            // Search handlers
+            const searchInput = document.getElementById("hero-search-input");
+            const searchBtn = document.getElementById("hero-search-btn");
+
+            searchBtn.addEventListener("click", () => {
+                searchQuery = searchInput.value.trim();
+                loadPublicEvents();
+            });
+
+            searchInput.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    searchQuery = searchInput.value.trim();
+                    loadPublicEvents();
+                }
+            });
+        });
+
+        function checkAuthHeader() {
+            const user = Auth.getCurrentUser();
+            const navAuth = document.getElementById("nav-auth-buttons");
+            if (user && navAuth) {
+                let dashUrl = "login.html";
+                if (user.role === "ADMIN") dashUrl = "admin/dashboard.html";
+                else if (user.role === "ORGANIZER") dashUrl = "organizer/dashboard.html";
+                else if (user.role === "ATTENDEE") dashUrl = "attendee/dashboard.html";
+
+                navAuth.innerHTML = `
+                    <a href="${dashUrl}" class="btn btn-primary px-3">
+                        <i class="fa-solid fa-gauge me-1"></i> Go to Dashboard (${Utils.escapeHtml(user.role)})
+                    </a>
+                `;
+            }
+        }
+
+        async function loadPublicEvents() {
+            const container = document.getElementById("events-grid-container");
+            UI.showLoading(container, "Loading events...");
+
+            try {
+                const res = await API.getEvents({
+                    status: "APPROVED",
+                    category: currentCategory,
+                    search: searchQuery
+                });
+
+                if (!res.data || res.data.length === 0) {
+                    UI.renderEmptyState(container, "No events found", "Try selecting a different category or clearing search filter.", "fa-calendar-xmark");
+                    return;
+                }
+
+                container.innerHTML = "";
+                res.data.forEach(ev => {
+                    const cardHtml = `
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card event-card">
+                                <div class="event-img-wrapper">
+                                    <img src="${ev.image_url || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&auto=format&fit=crop&q=80'}" class="event-img" alt="${Utils.escapeHtml(ev.title)}">
+                                    <span class="category-badge">${Utils.escapeHtml(ev.category)}</span>
+                                </div>
+                                <div class="event-body">
+                                    <h5 class="event-title text-truncate-2">${Utils.escapeHtml(ev.title)}</h5>
+                                    <div class="event-meta">
+                                        <span><i class="fa-solid fa-calendar-day me-1 text-primary"></i> ${Utils.formatDate(ev.event_date)} at ${Utils.formatTime(ev.start_time)}</span>
+                                        <span><i class="fa-solid fa-location-dot me-1 text-danger"></i> ${Utils.escapeHtml(ev.venue)}, ${Utils.escapeHtml(ev.city)}</span>
+                                    </div>
+                                    <div class="event-footer">
+                                        <div>
+                                            <span class="text-muted small d-block">Capacity</span>
+                                            <span class="fw-semibold text-dark">${ev.capacity} Seats</span>
+                                        </div>
+                                        <a href="login.html" class="btn btn-sm btn-outline-primary px-3 rounded-pill">Book / Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML("beforeend", cardHtml);
+                });
+            } catch (err) {
+                container.innerHTML = `<div class="alert alert-danger">Failed to load events. ${Utils.escapeHtml(err.message)}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
